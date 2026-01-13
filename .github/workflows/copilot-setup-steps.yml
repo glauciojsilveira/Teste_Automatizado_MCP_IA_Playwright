@@ -29,6 +29,13 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    # Customize this step as needed
-    - name: Build application
-      run: npx run build
+
+    - name: Run E2E tests by Glaucio
+      run: npx playwright test
+      
+    - uses: actions/upload-artifact@v5
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
