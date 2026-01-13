@@ -92,6 +92,41 @@ As configurações podem ser ajustadas no arquivo `playwright.config.js`:
 - Screenshots e vídeos
 - Navegadores a serem testados
 
+## ⚙️ Configuração para Playwright Test Agents (MCP) no Visual Studio 🔧
+
+O Playwright Test Agents (MCP) permite que ferramentas de IA (agents) gerem, corrijam e executem testes diretamente no seu repositório. Abaixo estão os passos básicos para habilitar essa integração no VS Code:
+
+1. **Pré-requisitos**
+   - Node.js 16+
+   - Playwright atualizado no projeto (reinstale se necessário: `npm i -D @playwright/test`).
+   - VS Code (recomenda-se versão **>= 1.105** para suporte completo da experiência agent).
+   - Extensão **Playwright** para VS Code (procure por `ms-playwright.playwright`).
+
+2. **Gerar definições dos agents**
+
+   No terminal do projeto, rode:
+
+   ```bash
+   npx playwright init-agents --loop=vscode
+   ```
+
+   Esse comando cria/atualiza as definições dos agents usadas pelo VS Code. Sempre execute novamente após atualizar o Playwright.
+
+3. **Workflow básico no VS Code**
+   - Abra o **Command Palette** (Ctrl/Cmd+Shift+P) e procure por comandos relacionados a *Playwright Agents* (Planner, Generator, Healer) ou por "Playwright: Start Test Agents".
+   - Use o **Planner** para gerar um plano de testes em `specs/` (ex.: `specs/basic-operations.md`).
+   - Use o **Generator** para transformar o plano em arquivos de teste sob `tests/`.
+   - Use o **Healer** para tentar corrigir testes que falharam automaticamente.
+
+4. **Seed test**
+
+   O Planner usa um *seed test* (ex.: `seed.spec.ts`) para inicializar o contexto da aplicação. Garanta que o `seed.spec.ts` esteja presente e configurado para preparar o ambiente de testes.
+
+5. **Recomendações e observações**
+   - Integre o Playwright Agents com sua ferramenta de IA preferida (por exemplo, extensões que suportam MCP). A experiência pode variar dependendo da extensão/serviço.
+   - Sempre regenere as definições com `npx playwright init-agents --loop=vscode` quando atualizar o Playwright.
+   - Consulte a documentação oficial para exemplos e detalhes: https://playwright.dev/docs/test-agents
+
 ## 🔍 Recursos do Playwright
 
 - **Auto-wait**: Playwright espera automaticamente pelos elementos
